@@ -47,7 +47,7 @@ public class Step01VariableTest extends PlainTestCase {
         String piari = null;
         String dstore = "mai";
         sea = sea + land + piari + ":" + dstore;
-        log(sea); // your answer? => "mystic8null:mai"
+        log(sea); // your answer? => mystic8null:mai
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -56,7 +56,7 @@ public class Step01VariableTest extends PlainTestCase {
         String land = "oneman";
         sea = land;
         land = land + "'s dreams";
-        log(sea); // your answer? => "oneman's dreams"
+        log(sea); // your answer? => oneman
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -65,7 +65,7 @@ public class Step01VariableTest extends PlainTestCase {
         int land = 415;
         sea = land;
         land++;
-        log(sea); // your answer? => 
+        log(sea); // your answer? => 415
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -75,7 +75,7 @@ public class Step01VariableTest extends PlainTestCase {
         sea = land;
         sea = land.add(new BigDecimal(1));
         sea.add(new BigDecimal(1));
-        log(sea); // your answer? => 
+        log(sea); // your answer? => 416
     }
 
     // ===================================================================================
@@ -89,19 +89,19 @@ public class Step01VariableTest extends PlainTestCase {
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
     public void test_variable_instance_variable_default_String() {
         String sea = instanceBroadway;
-        log(sea); // your answer? => 
+        log(sea); // your answer? => null
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
     public void test_variable_instance_variable_default_int() {
         int sea = instanceDockside;
-        log(sea); // your answer? => 
+        log(sea); // your answer? => 0
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
     public void test_variable_instance_variable_default_Integer() {
         Integer sea = instanceHangar;
-        log(sea); // your answer? => 
+        log(sea); // your answer? => null
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -110,7 +110,7 @@ public class Step01VariableTest extends PlainTestCase {
         instanceMagiclamp = "magician";
         helpInstanceVariableViaMethod(instanceMagiclamp);
         String sea = instanceBroadway + "|" + instanceDockside + "|" + instanceHangar + "|" + instanceMagiclamp;
-        log(sea); // your answer? => 
+        log(sea); // your answer? => bigband|1|null|magician
     }
 
     private void helpInstanceVariableViaMethod(String instanceMagiclamp) {
@@ -130,7 +130,7 @@ public class Step01VariableTest extends PlainTestCase {
         String sea = "harbor";
         int land = 415;
         helpMethodArgumentImmutableMethodcall(sea, land);
-        log(sea); // your answer? => 
+        log(sea); // your answer? => harbor
     }
 
     private void helpMethodArgumentImmutableMethodcall(String sea, int land) {
@@ -147,7 +147,7 @@ public class Step01VariableTest extends PlainTestCase {
         StringBuilder sea = new StringBuilder("harbor");
         int land = 415;
         helpMethodArgumentMethodcall(sea, land);
-        log(sea); // your answer? => 
+        log(sea); // your answer? => harbor416
     }
 
     private void helpMethodArgumentMethodcall(StringBuilder sea, int land) {
@@ -163,7 +163,8 @@ public class Step01VariableTest extends PlainTestCase {
         StringBuilder sea = new StringBuilder("harbor");
         int land = 415;
         helpMethodArgumentVariable(sea, land);
-        log(sea); // your answer? => 
+        log(sea); // your answer? => harborharbor416 不正解, 正解：harbor
+                  // 参照値が173行目で置き換わってるため、このブロック内のseaはharborを指す参照値を持つ。
     }
 
     private void helpMethodArgumentVariable(StringBuilder sea, int land) {
@@ -191,8 +192,13 @@ public class Step01VariableTest extends PlainTestCase {
      * o すべての変数をlog()でカンマ区切りの文字列で表示
      * </pre>
      */
+    int piari;
+
     public void test_variable_writing() {
         // define variables here
+        String sea = "mystic";
+        Integer land = null;
+        log(sea + "," + land + "," + piari);
     }
 
     // ===================================================================================
@@ -208,7 +214,32 @@ public class Step01VariableTest extends PlainTestCase {
      * _/_/_/_/_/_/_/_/_/_/
      * </pre>
      */
-    public void test_variable_yourExercise() {
+    public void test_variable_yourExercise_1() {
         // write your code here
+        String sea = "";
+
+        boolean isSame = false;
+        String str_1 = "apple";
+        String str_2 = new String("apple");
+
+        isSame = str_1 == str_2;
+
+        sea = isSame ? "str_1 is str_2" : "str_1 is not str_2";
+
+        log(sea); // your answer? =>
+    }
+
+    public void test_variable_yourExercize_2() {
+        String sea = "";
+
+        boolean isSame = false;
+        String str_1 = "apple";
+        String str_2 = "apple";
+
+        isSame = str_1 == str_2;
+
+        sea = isSame ? "str_1 is str_2" : "str_1 is not str_2";
+
+        log(sea); // your answer?
     }
 }
