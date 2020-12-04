@@ -52,7 +52,7 @@ public class Step02IfForTest extends PlainTestCase {
         } else {
             sea = 7;
         }
-        log(sea); // your answer? => 
+        log(sea); // your answer? => 7
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -67,7 +67,7 @@ public class Step02IfForTest extends PlainTestCase {
         } else {
             sea = 9;
         }
-        log(sea); // your answer? => 
+        log(sea); // your answer? => 7
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -91,7 +91,8 @@ public class Step02IfForTest extends PlainTestCase {
         if (land) {
             sea = 10;
         }
-        log(sea); // your answer? => 
+        log(sea); // your answer? => 905 不正解, 正解： 10
+                  // 84行目, landがtrueになっている。
     }
 
     // ===================================================================================
@@ -107,7 +108,7 @@ public class Step02IfForTest extends PlainTestCase {
                 sea = stage;
             }
         }
-        log(sea); // your answer? => 
+        log(sea); // your answer? => dockside
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -117,7 +118,7 @@ public class Step02IfForTest extends PlainTestCase {
         for (String stage : stageList) {
             sea = stage;
         }
-        log(sea); // your answer? => 
+        log(sea); // your answer? => magiclamp
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -133,7 +134,7 @@ public class Step02IfForTest extends PlainTestCase {
                 break;
             }
         }
-        log(sea); // your answer? => 
+        log(sea); // your answer? => hangar
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -149,7 +150,7 @@ public class Step02IfForTest extends PlainTestCase {
             }
         });
         String sea = sb.toString();
-        log(sea); // your answer? => 
+        log(sea); // your answer? => dockside
     }
 
     // ===================================================================================
@@ -161,6 +162,15 @@ public class Step02IfForTest extends PlainTestCase {
      */
     public void test_iffor_making() {
         // write if-for here
+        List<String> stageList = prepareStageList();
+        List<String> resultList = new ArrayList<String>();
+
+        for (String stage : stageList)
+            if (stage.contains("a"))
+                resultList.add(stage);
+
+        for (String result : resultList)
+            log(result);
     }
 
     // ===================================================================================
@@ -173,7 +183,7 @@ public class Step02IfForTest extends PlainTestCase {
     public void test_iffor_refactor_foreach_to_forEach() {
         List<String> stageList = prepareStageList();
         String sea = null;
-        for (String stage : stageList) {
+        /*for (String stage : stageList) {
             if (stage.startsWith("br")) {
                 continue;
             }
@@ -181,8 +191,47 @@ public class Step02IfForTest extends PlainTestCase {
             if (stage.contains("ga")) {
                 break;
             }
-        }
+        }*/
+        AtomicString str = new AtomicString();
+        stageList.forEach((String stage) -> {
+            if (stage.startsWith("br")) {
+                return;
+            }
+            if (!str.isFix()) {
+                str.setString(stage);
+            }
+            if (stage.contains("ga")) {
+                str.setFix();
+            }
+        });
+        sea = str.getString();
+
         log(sea); // should be same as before-fix
+    }
+
+    private static class AtomicString {
+        String str;
+        boolean fix = false;
+
+        AtomicString() {
+            this.str = "";
+        }
+
+        public void setString(String str) {
+            this.str = str;
+        }
+
+        public String getString() {
+            return this.str;
+        }
+
+        public void setFix() {
+            this.fix = true;
+        }
+
+        public boolean isFix() {
+            return this.fix;
+        }
     }
 
     /**
@@ -190,13 +239,26 @@ public class Step02IfForTest extends PlainTestCase {
      * (if文for文についてあなたのオリジナルの質問形式のエクササイズを作ってみましょう)
      * <pre>
      * _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
-     * your question here (ここにあなたの質問を):
+     * your question here (ここにあなたの質問を): 何が出力されるでしょうか？(264行を有効/向こうにしながら確かめる。)
      * 
      * _/_/_/_/_/_/_/_/_/_/
      * </pre>
      */
     public void test_iffor_yourExercise() {
         // write your code here
+        List<String> stageList = prepareStageList();
+        String sea = "";
+        int index = 0;
+
+        for (String stage : stageList) {
+            sea = stageList.get(index);
+            if (index == 1) {
+                stageList.remove(index);
+            }
+            index++;
+        }
+
+        log("result: " + sea);
     }
 
     // ===================================================================================
