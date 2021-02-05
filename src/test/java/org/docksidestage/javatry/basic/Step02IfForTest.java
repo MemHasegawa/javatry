@@ -25,7 +25,7 @@ import org.docksidestage.unit.PlainTestCase;
  * Operate exercise as javadoc. If it's question style, write your answer before test execution. <br>
  * (javadocの通りにエクササイズを実施。質問形式の場合はテストを実行する前に考えて答えを書いてみましょう)
  * @author jflute
- * @author your_name_here
+ * @author MemCHT
  */
 public class Step02IfForTest extends PlainTestCase {
 
@@ -192,16 +192,15 @@ public class Step02IfForTest extends PlainTestCase {
                 break;
             }
         }*/
+        // 見直す
         AtomicString str = new AtomicString();
         stageList.forEach((String stage) -> {
-            if (stage.startsWith("br")) {
+            if (stage.startsWith("br") && str.isFix()) {
                 return;
             }
-            if (!str.isFix()) {
-                str.setString(stage);
-            }
+            str.setString(stage);
             if (stage.contains("ga")) {
-                str.setFix();
+                str.fix();
             }
         });
         sea = str.getString();
@@ -225,7 +224,7 @@ public class Step02IfForTest extends PlainTestCase {
             return this.str;
         }
 
-        public void setFix() {
+        public void fix() {
             this.fix = true;
         }
 
