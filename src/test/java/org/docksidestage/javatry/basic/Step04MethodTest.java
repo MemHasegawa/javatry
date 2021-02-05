@@ -34,9 +34,9 @@ public class Step04MethodTest extends PlainTestCase {
      * (メソッド終了時の変数 sea の中身は？)
      */
     public void test_method_call_basic() {
-        // TODO_2021年2月5日_ここから
+        // TODO_2020年12月4日_ここから
         String sea = supplySomething();
-        log(sea); // your answer? =>
+        log(sea); // your answer? => over
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -44,7 +44,7 @@ public class Step04MethodTest extends PlainTestCase {
         String sea = functionSomething("mystic");
         consumeSomething(supplySomething());
         runnableSomething();
-        log(sea); // your answer? => 
+        log(sea); // your answer? => mysmys
     }
 
     private String functionSomething(String name) {
@@ -73,11 +73,13 @@ public class Step04MethodTest extends PlainTestCase {
         St4MutableStage mutable = new St4MutableStage();
         int sea = 904;
         boolean land = false;
+        // 900, false, piari
         helloMutable(sea - 4, land, mutable);
+        // sea -> mystic
         if (!land) {
             sea = sea + mutable.getStageName().length();
         }
-        log(sea); // your answer? => 
+        log(sea); // your answer? => 910
     }
 
     private int helloMutable(int sea, Boolean land, St4MutableStage piari) {
@@ -109,23 +111,23 @@ public class Step04MethodTest extends PlainTestCase {
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
     public void test_method_instanceVariable() {
         hasAnnualPassport = true;
-        int sea = inParkCount;
+        int sea = inParkCount; // -> 0
         offAnnualPassport(hasAnnualPassport);
         for (int i = 0; i < 100; i++) {
             goToPark();
         }
         ++sea;
         sea = inParkCount;
-        log(sea); // your answer? => 
+        log(sea); // your answer? => 100
     }
 
     private void offAnnualPassport(boolean hasAnnualPassport) {
-        hasAnnualPassport = false;
+        hasAnnualPassport = false; // ローカルスコープ
     }
 
     private void goToPark() {
         if (hasAnnualPassport) {
-            ++inParkCount;
+            ++inParkCount; // グローバルスコープ
         }
     }
 
@@ -153,12 +155,44 @@ public class Step04MethodTest extends PlainTestCase {
      */
     public void test_method_making() {
         // comment out after making these methods
-        //String replaced = replaceCtoB(replaceAtoB("ABC"));
-        //String sea = addPrefix("broadway", replaced);
-        //if (isAvailableLogging()) {
-        //    showSea(sea);
-        //}
+        String replaced = replaceCtoB(replaceAtoB("ABC"));
+        String sea = addPrefix("broadway", replaced);
+        if (isAvailableLogging()) {
+            showSea(sea); // broadway:BBB
+        }
     }
 
     // write methods here
+    private boolean availableLogging = true;
+
+    /*public void test_method_log() {
+        log(replaceCtoB(replaceAtoB("ABCA")));
+        log(addPrefix("hoge", "prefix"));
+        showSea("hoge");
+    }*/
+
+    private String replaceAtoB(String str) {
+        String replaced = str.replaceAll("A", "B");
+        log(replaced);
+        return replaced;
+    }
+
+    private String replaceCtoB(String str) {
+        String replaced = str.replaceAll("C", "B");
+        log(replaced);
+        return replaced;
+    }
+
+    private String addPrefix(String str, String prefix) {
+        String result = str + ":" + prefix;
+        return result;
+    }
+
+    private boolean isAvailableLogging() {
+        return availableLogging;
+    }
+
+    private void showSea(String sea) {
+        log(sea);
+    }
 }
