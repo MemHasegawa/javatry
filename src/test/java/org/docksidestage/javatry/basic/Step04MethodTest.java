@@ -34,6 +34,7 @@ public class Step04MethodTest extends PlainTestCase {
      * (メソッド終了時の変数 sea の中身は？)
      */
     public void test_method_call_basic() {
+        // TODO_2021年2月5日_ここから
         String sea = supplySomething();
         log(sea); // your answer? =>
     }
