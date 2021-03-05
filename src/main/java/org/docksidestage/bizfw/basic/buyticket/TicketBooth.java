@@ -42,47 +42,88 @@ public class TicketBooth {
     // ===================================================================================
     //                                                                          Buy Ticket
     //                                                                          ==========
-    public void buyOneDayPassport(int handedMoney) {
-        if (quantity <= 0) {
-            throw new TicketSoldOutException("Sold out");
-        }
-        if (handedMoney < ONE_DAY_PRICE) {
-            throw new TicketShortMoneyException("Short money: " + handedMoney);
-        }
-        --quantity;
 
-        // salesProceedsをラッパークラスにするのはなぜ？
+    /**
+     * OneDayPassportを買う
+     * @param handedMoney 受け取ったお金
+     * @return お釣り
+     */
+    public int buyOneDayPassport(int handedMoney) {
+        final int count = 1;
+        final int price = ONE_DAY_PRICE;
+        int change = 0;
 
-        if (salesProceeds != null) {
-            salesProceeds = salesProceeds + ONE_DAY_PRICE /*handedMoney*/;
-        } else {
-            salesProceeds = ONE_DAY_PRICE /*handedMoney*/;
-        }
+        change = buyPassport(handedMoney, count, price);
+
+        return change;
     }
 
     /**
      * TwoDayPassportを買う
-     * @param handedMoney 手持ちのお金
+     * @param handedMoney 受け取ったお金
      * @return お釣り
      */
     public int buyTwoDayPassport(int handedMoney) {
-        if (quantity <= 1) {
+        final int count = 2;
+        final int price = TWO_DAY_PRICE;
+        int change = 0;
+
+        change = buyPassport(handedMoney, count, price);
+
+        return change;
+    }
+
+    /**
+     * Passportを買う
+     * @param handedMoney 受け取ったお金
+     * @param count チケットを買う枚数
+     * @param price 料金
+     * @return お釣り
+     */
+    private int buyPassport(int handedMoney, int count, int price) {
+        // 売り切れチェック
+        checkSoldOut();
+        // お金不足チェック
+        checkShortMoney(handedMoney, price);
+        // チケット数を減らす
+        reduceQuantity(count);
+        // 売り上げを増やす
+        increaseSalesProceeds(count, price);
+        // お釣りを計算して返す
+        return calcChange(handedMoney, price);
+    }
+
+    // -------------------- buy ticket modules --------------------
+    private void checkSoldOut() {
+        if (quantity <= 0) {
             throw new TicketSoldOutException("Sold out");
         }
-        if (handedMoney < TWO_DAY_PRICE) {
+    }
+
+    private void checkShortMoney(int handedMoney, int price) {
+        if (handedMoney < price) {
             throw new TicketShortMoneyException("Short money: " + handedMoney);
         }
-
-        quantity = quantity - 2;
-
-        if (salesProceeds != null) {
-            salesProceeds = salesProceeds + TWO_DAY_PRICE;
-        } else {
-            salesProceeds = TWO_DAY_PRICE;
-        }
-
-        return handedMoney - TWO_DAY_PRICE;
     }
+
+    private int reduceQuantity(int count) {
+        quantity = quantity - count;
+        return quantity;
+    }
+
+    private int increaseSalesProceeds(int count, int price) {
+        if (salesProceeds != null) {
+            return salesProceeds = salesProceeds + price;
+        } else {
+            return salesProceeds = price;
+        }
+    }
+
+    private int calcChange(int handedMoney, int price) {
+        return handedMoney - price;
+    }
+
+    // -------------------- end buy ticket modules --------------------
 
     public static class TicketSoldOutException extends RuntimeException {
 
