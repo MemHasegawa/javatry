@@ -64,7 +64,7 @@ public class TicketBooth {
      * @return お釣り
      */
     public int buyTwoDayPassport(int handedMoney) {
-        final int count = 2;
+        final int count = 1;
         final int price = TWO_DAY_PRICE;
         int change = 0;
 
@@ -94,23 +94,27 @@ public class TicketBooth {
     }
 
     // -------------------- buy ticket modules --------------------
+    // 売り切れチェック
     private void checkSoldOut() {
         if (quantity <= 0) {
             throw new TicketSoldOutException("Sold out");
         }
     }
 
+    // お金不足チェック
     private void checkShortMoney(int handedMoney, int price) {
         if (handedMoney < price) {
             throw new TicketShortMoneyException("Short money: " + handedMoney);
         }
     }
 
+    // チケット数を減らす
     private int reduceQuantity(int count) {
         quantity = quantity - count;
         return quantity;
     }
 
+    // 売り上げを増やす
     private int increaseSalesProceeds(int count, int price) {
         if (salesProceeds != null) {
             return salesProceeds = salesProceeds + price;
@@ -119,6 +123,7 @@ public class TicketBooth {
         }
     }
 
+    // お釣りを計算して返す
     private int calcChange(int handedMoney, int price) {
         return handedMoney - price;
     }
