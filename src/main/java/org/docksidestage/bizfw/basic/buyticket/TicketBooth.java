@@ -17,6 +17,7 @@ package org.docksidestage.bizfw.basic.buyticket;
 
 /**
  * @author jflute
+ * @author MemCHT
  */
 public class TicketBooth {
 
@@ -46,31 +47,25 @@ public class TicketBooth {
     /**
      * OneDayPassportを買う
      * @param handedMoney 受け取ったお金
-     * @return お釣り
+     * @return OneDayPassportチケット
      */
-    public int buyOneDayPassport(int handedMoney) {
+    public Ticket buyOneDayPassport(int handedMoney) {
         final int count = 1;
         final int price = ONE_DAY_PRICE;
-        int change = 0;
 
-        change = buyPassport(handedMoney, count, price);
-
-        return change;
+        return buyPassport(handedMoney, count, price);
     }
 
     /**
      * TwoDayPassportを買う
      * @param handedMoney 受け取ったお金
-     * @return お釣り
+     * @return TwoDayPassportチケット
      */
-    public int buyTwoDayPassport(int handedMoney) {
-        final int count = 1;
+    public Ticket buyTwoDayPassport(int handedMoney) {
+        final int count = 2;
         final int price = TWO_DAY_PRICE;
-        int change = 0;
 
-        change = buyPassport(handedMoney, count, price);
-
-        return change;
+        return buyPassport(handedMoney, count, price);
     }
 
     /**
@@ -80,17 +75,13 @@ public class TicketBooth {
      * @param price 料金
      * @return お釣り
      */
-    private int buyPassport(int handedMoney, int count, int price) {
-        // 売り切れチェック
-        checkSoldOut();
-        // お金不足チェック
-        checkShortMoney(handedMoney, price);
-        // チケット数を減らす
-        reduceQuantity(count);
-        // 売り上げを増やす
-        increaseSalesProceeds(count, price);
-        // お釣りを計算して返す
-        return calcChange(handedMoney, price);
+    private Ticket buyPassport(int handedMoney, int count, int price) {
+        checkSoldOut(); // 売り切れチェック
+        checkShortMoney(handedMoney, price); // お金不足チェック
+        reduceQuantity(count); // チケット数を減らす
+        increaseSalesProceeds(count, price); // 売り上げを増やす
+        // return calcChange(handedMoney, price); // お釣りを計算して返す
+        return new Ticket(price);
     }
 
     // -------------------- buy ticket modules --------------------
@@ -109,9 +100,8 @@ public class TicketBooth {
     }
 
     // チケット数を減らす
-    private int reduceQuantity(int count) {
+    private void reduceQuantity(int count) {
         quantity = quantity - count;
-        return quantity;
     }
 
     // 売り上げを増やす
@@ -123,7 +113,7 @@ public class TicketBooth {
         }
     }
 
-    // お釣りを計算して返す
+    // お釣りを計算して返す ※意味で切り出す！さらに言えば、オブジェクトに分けて再利用が効くようにcalculateChangeクラスがあっても良い。。
     private int calcChange(int handedMoney, int price) {
         return handedMoney - price;
     }
