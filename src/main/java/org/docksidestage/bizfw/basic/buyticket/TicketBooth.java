@@ -47,41 +47,44 @@ public class TicketBooth {
     /**
      * OneDayPassportを買う
      * @param handedMoney 受け取ったお金
-     * @return OneDayPassportチケット
+     * @return OneDayPassportチケット購入結果
      */
-    public Ticket buyOneDayPassport(int handedMoney) {
-        final int count = 1;
+    public TicketBuyResult buyOneDayPassport(int handedMoney) {
+        final int ticketDays = 1;
         final int price = ONE_DAY_PRICE;
 
-        return buyPassport(handedMoney, count, price);
+        return buyPassport(handedMoney, ticketDays, price);
     }
 
     /**
      * TwoDayPassportを買う
      * @param handedMoney 受け取ったお金
-     * @return TwoDayPassportチケット
+     * @return TwoDayPassportチケット購入結果
      */
-    public Ticket buyTwoDayPassport(int handedMoney) {
-        final int count = 2;
+    public TicketBuyResult buyTwoDayPassport(int handedMoney) {
+        final int ticketDays = 2;
         final int price = TWO_DAY_PRICE;
 
-        return buyPassport(handedMoney, count, price);
+        return buyPassport(handedMoney, ticketDays, price);
     }
 
     /**
      * Passportを買う
      * @param handedMoney 受け取ったお金
-     * @param count チケットを買う枚数
+     * @param ticketDays チケットの日数
      * @param price 料金
      * @return お釣り
      */
-    private Ticket buyPassport(int handedMoney, int count, int price) {
+    private TicketBuyResult buyPassport(int handedMoney, int ticketDays, int price) {
         checkSoldOut(); // 売り切れチェック
         checkShortMoney(handedMoney, price); // お金不足チェック
-        reduceQuantity(count); // チケット数を減らす
-        increaseSalesProceeds(count, price); // 売り上げを増やす
-        // return calcChange(handedMoney, price); // お釣りを計算して返す
-        return new Ticket(price);
+        reduceQuantity(ticketDays); // チケット数を減らす
+        increaseSalesProceeds(ticketDays, price); // 売り上げを増やす
+
+        Ticket ticket = new Ticket(price); // チケットを生成
+        int change = calcChange(handedMoney, price); // お釣りを計算
+
+        return new TicketBuyResult(ticket, ticketDays, change); // チケットの購入結果インスタンスを返す
     }
 
     // -------------------- buy ticket modules --------------------
