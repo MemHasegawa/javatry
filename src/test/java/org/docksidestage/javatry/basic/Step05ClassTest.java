@@ -136,7 +136,7 @@ public class Step05ClassTest extends PlainTestCase {
      * Now you cannot get ticket if you buy one-day passport, so return Ticket class and do in-park. <br>
      * (OneDayPassportを買ってもチケットをもらえませんでした。戻り値でTicketクラスを戻すようにしてインしましょう)
      */
-    // TODO_長谷川_2021年3月5日_考え中
+    // TODO_長谷川_2021年3月5日_考え中_
     public void test_class_moreFix_return_ticket() {
         // uncomment out after modifying the method
         //TicketBooth booth = new TicketBooth();
