@@ -249,7 +249,8 @@ public class Step02IfForTest extends PlainTestCase {
         String sea = "";
         int index = 0;
 
-        for (String stage : stageList) {
+        for (@SuppressWarnings("unused")
+        String stage : stageList) {
             sea = stageList.get(index);
             if (index == 1) {
                 stageList.remove(index);

@@ -25,7 +25,7 @@ public class TicketBuyResult {
     //                                                                           Attribute
     //                                                                           =========
     private final Ticket ticket;
-    private final Ticket[] tickets;
+    // private final Ticket[] tickets;
     private final int change;
 
     // ===================================================================================
@@ -37,22 +37,36 @@ public class TicketBuyResult {
      * @param numberOfTickets 発行するチケットの枚数
      * @param change お釣り
      */
-    public TicketBuyResult(Ticket ticket, int numberOfTickets, int change) {
-        this.ticket = ticket;
-        this.tickets = createInitialTickets(ticket, numberOfTickets, change);
+    public TicketBuyResult(/*Ticket ticket, */int ticketDays, int change, int price) {
+        this.ticket = createTicket(ticketDays, price);
+        // this.tickets = createInitialTickets(ticket, numberOfTickets, change);
         this.change = change;
     }
 
     // ===================================================================================
     //                                                                 Constructor Modules
     //                                                                            ========
-    private Ticket[] createInitialTickets(Ticket ticket, int numberOfTickets, int change) {
-        Ticket[] tickets = new Ticket[numberOfTickets];
+    private Ticket createTicket(int ticketDays, int price) {
+        switch (ticketDays) {
+        case 1:
+            return new OneDayPassport(price);
+        case 2:
+            return new TwoDayPassport(price);
+        default:
+            throw new InvalidTicketDaysException("チケットに設定された日数が無効です");
+        }
+    }
 
-        for (int i = 0; i < tickets.length; i++)
-            tickets[i] = new Ticket(change);
+    // ===================================================================================
+    //                                                                          Expression
+    //                                                                            ========
+    public static class InvalidTicketDaysException extends RuntimeException {
 
-        return tickets;
+        private static final long serialVersionUID = 1L; // これは何？
+
+        public InvalidTicketDaysException(String msg) {
+            super(msg);
+        }
     }
 
     // ===================================================================================

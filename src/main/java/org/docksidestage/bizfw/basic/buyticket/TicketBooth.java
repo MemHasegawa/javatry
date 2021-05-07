@@ -53,7 +53,7 @@ public class TicketBooth {
         final int ticketDays = 1;
         final int price = ONE_DAY_PRICE;
 
-        return buyPassport(handedMoney, ticketDays, price);
+        return doBuyPassport(handedMoney, ticketDays, price);
     }
 
     /**
@@ -65,7 +65,7 @@ public class TicketBooth {
         final int ticketDays = 2;
         final int price = TWO_DAY_PRICE;
 
-        return buyPassport(handedMoney, ticketDays, price);
+        return doBuyPassport(handedMoney, ticketDays, price);
     }
 
     /**
@@ -75,16 +75,16 @@ public class TicketBooth {
      * @param price 料金
      * @return お釣り
      */
-    private TicketBuyResult buyPassport(int handedMoney, int ticketDays, int price) {
+    private TicketBuyResult doBuyPassport(int handedMoney, int ticketDays, int price) {
         checkSoldOut(); // 売り切れチェック
         checkShortMoney(handedMoney, price); // お金不足チェック
         reduceQuantity(ticketDays); // チケット数を減らす
         increaseSalesProceeds(ticketDays, price); // 売り上げを増やす
 
-        Ticket ticket = new Ticket(price); // チケットを生成
+        /*Ticket ticket = new Ticket(price);*/ // チケットを生成
         int change = calcChange(handedMoney, price); // お釣りを計算
 
-        return new TicketBuyResult(ticket, ticketDays, change); // チケットの購入結果インスタンスを返す
+        return new TicketBuyResult(/*ticket, */ticketDays, change, price); // チケットの購入結果インスタンスを返す
     }
 
     // -------------------- buy ticket modules --------------------

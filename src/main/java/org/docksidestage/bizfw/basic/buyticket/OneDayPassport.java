@@ -19,43 +19,32 @@ package org.docksidestage.bizfw.basic.buyticket;
  * @author jflute
  * @author MemCHT
  */
-public class Ticket {
+public class OneDayPassport extends Ticket {
 
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    private final int displayPrice;
-    protected boolean alreadyIn;
+
+    private String name = "OneDayPassport";
+    private int days = 1;
 
     // ===================================================================================
     //                                                                         Constructor
     //                                                                         ===========
-    public Ticket(int displayPrice) {
-        this.displayPrice = displayPrice;
+    public OneDayPassport(int displayPrice) {
+        super(displayPrice);
     }
 
     // ===================================================================================
     //                                                                             In Park
     //                                                                             =======
-    public void doInPark() {
-        if (alreadyIn) {
-            throw new IllegalStateException("Already in park by this ticket: displayedPrice=" + displayPrice);
-        }
-        alreadyIn = true;
-    }
 
     // ===================================================================================
     //                                                                            Accessor
     //                                                                            ========
-    public int getDisplayPrice() {
-        return displayPrice;
-    }
 
-    public boolean isAlreadyIn() {
-        return alreadyIn;
-    }
-
+    @Override
     public String getName() {
-        return "AbstructTicket";
+        return this.name;
     }
 }

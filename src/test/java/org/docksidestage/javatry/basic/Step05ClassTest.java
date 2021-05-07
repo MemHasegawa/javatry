@@ -125,7 +125,7 @@ public class Step05ClassTest extends PlainTestCase {
      * Recycle duplicate logics between one-day and two-day by e.g. private method in class. (And confirm result of both before and after) <br>
      * (OneDayとTwoDayで冗長なロジックがあったら、クラス内のprivateメソッドなどで再利用しましょう (修正前と修正後の実行結果を確認))
      */
-    // TODO_長谷川_2021年2月5日_考え中
+    // TODO 長谷川_2021年2月5日_考え中
     public void test_class_letsFix_refactor_recycle() {
         TicketBooth booth = new TicketBooth();
         booth.buyOneDayPassport(10000);
@@ -139,7 +139,7 @@ public class Step05ClassTest extends PlainTestCase {
      * Now you cannot get ticket if you buy one-day passport, so return Ticket class and do in-park. <br>
      * (OneDayPassportを買ってもチケットをもらえませんでした。戻り値でTicketクラスを戻すようにしてインしましょう)
      */
-    // TODO_長谷川_2021年3月5日_考え中_
+    // TODO 長谷川_2021年3月5日_考え中_
     // 要件に一貫性があれば、どのように実装しても良い。
     public void test_class_moreFix_return_ticket() {
         // uncomment out after modifying the method
@@ -171,9 +171,15 @@ public class Step05ClassTest extends PlainTestCase {
      * Now you cannot judge ticket type "one-day or two-day?", so add method to judge it. <br>
      * (チケットをもらってもOneDayなのかTwoDayなのか区別が付きません。区別を付けられるメソッドを追加しましょう)
      */
-    // TODO_長谷川_2021年4月2日_複数のTicketをどう管理するか考え中。
+    // TODO 長谷川_2021年4月2日_複数のTicketをどう管理するか考え中。
     public void test_class_moreFix_ticketType() {
         // your confirmation code here
+        TicketBooth booth = new TicketBooth();
+        int handedMoney = 20000;
+        TicketBuyResult twoDayPassportResult = booth.buyTwoDayPassport(handedMoney);
+        Ticket twoDayPassport = twoDayPassportResult.getTicket();
+        String ticketName = twoDayPassport.getName();
+        log("ticketName: " + ticketName);
     }
 
     /**
