@@ -19,7 +19,7 @@ package org.docksidestage.bizfw.basic.buyticket;
  * @author jflute
  * @author MemCHT
  */
-public class Ticket {
+public abstract class Ticket {
 
     // ===================================================================================
     //                                                                           Attribute
@@ -37,12 +37,14 @@ public class Ticket {
     // ===================================================================================
     //                                                                             In Park
     //                                                                             =======
+    // 
     public void doInPark() {
         if (alreadyIn) {
             throw new IllegalStateException("Already in park by this ticket: displayedPrice=" + displayPrice);
         }
         alreadyIn = true;
     }
+    // TODO 長谷川 TwoDayPassport考えるときに修正が必要 (2021/05/07)
 
     // ===================================================================================
     //                                                                            Accessor
@@ -55,7 +57,5 @@ public class Ticket {
         return alreadyIn;
     }
 
-    public String getName() {
-        return "AbstructTicket";
-    }
+    public abstract String getName();
 }

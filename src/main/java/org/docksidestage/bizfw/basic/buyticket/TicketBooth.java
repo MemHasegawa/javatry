@@ -50,6 +50,8 @@ public class TicketBooth {
      * @return OneDayPassportチケット購入結果
      */
     public TicketBuyResult buyOneDayPassport(int handedMoney) {
+        // 種別に依存してよいのはこのメソッド。
+        // TODO 長谷川 ここにnew OneDayPassportとかがあるのがベスト。 (2021/05/07)
         final int ticketDays = 1;
         final int price = ONE_DAY_PRICE;
 
@@ -62,6 +64,8 @@ public class TicketBooth {
      * @return TwoDayPassportチケット購入結果
      */
     public TicketBuyResult buyTwoDayPassport(int handedMoney) {
+        // 種別に依存してよいのはこのメソッド。
+        // TODO 長谷川 ここにnew OneDayPassportとかがあるのがベスト。 (2021/05/07)
         final int ticketDays = 2;
         final int price = TWO_DAY_PRICE;
 

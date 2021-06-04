@@ -33,11 +33,12 @@ public class TicketBuyResult {
     //                                                                         ===========
     /**
      * チケットの購入結果
-     * @param ticket チケット
-     * @param numberOfTickets 発行するチケットの枚数
+     * @param ticketDays 発行するチケットの有効日数
+     * @param price チケットの費用
      * @param change お釣り
      */
-    public TicketBuyResult(/*Ticket ticket, */int ticketDays, int change, int price) {
+    // // TODO 長谷川 ドキュメントを治す (2021/05/07)
+    public TicketBuyResult(/*Ticket ticket, */int ticketDays, int price, int change) {
         this.ticket = createTicket(ticketDays, price);
         // this.tickets = createInitialTickets(ticket, numberOfTickets, change);
         this.change = change;
@@ -53,15 +54,18 @@ public class TicketBuyResult {
         case 2:
             return new TwoDayPassport(price);
         default:
-            throw new InvalidTicketDaysException("チケットに設定された日数が無効です");
+            // 例外を書くときは、この例外を見る人を考える
+            throw new InvalidTicketDaysException("チケットに設定された日数が無効です: " + ticketDays);
         }
     }
+    // TODO 長谷川 イメージがつきづらいので、TicketBoothにあったほうが良い。 (2021/05/07)
 
     // ===================================================================================
-    //                                                                          Expression
+    //                                                                           Exception
     //                                                                            ========
     public static class InvalidTicketDaysException extends RuntimeException {
 
+        // TODO 長谷川 次回聞くことになった。 (2021/05/07)
         private static final long serialVersionUID = 1L; // これは何？
 
         public InvalidTicketDaysException(String msg) {

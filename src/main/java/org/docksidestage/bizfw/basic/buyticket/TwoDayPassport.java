@@ -39,6 +39,15 @@ public class TwoDayPassport extends Ticket {
     //                                                                             In Park
     //                                                                             =======
 
+    // TODO 長谷川 doInParkのオーバーライド考え途中 (2021/05/07)
+    /*@Override
+    public void doInPark() {
+        if (alreadyIn) {
+            throw new IllegalStateException("Already in park by this ticket: displayedPrice=" + displayPrice);
+        }
+        alreadyIn = true;
+    }*/
+
     // ===================================================================================
     //                                                                            Accessor
     //                                                                            ========
