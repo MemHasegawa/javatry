@@ -33,32 +33,13 @@ public class TicketBuyResult {
     //                                                                         ===========
     /**
      * チケットの購入結果
-     * @param ticketDays 発行するチケットの有効日数
-     * @param price チケットの費用
+     * @param ticket 発行するチケット
      * @param change お釣り
      */
-    // // TODO 長谷川 ドキュメントを治す (2021/05/07)
-    public TicketBuyResult(/*Ticket ticket, */int ticketDays, int price, int change) {
-        this.ticket = createTicket(ticketDays, price);
-        // this.tickets = createInitialTickets(ticket, numberOfTickets, change);
+    public TicketBuyResult(Ticket ticket, int change) {
+        this.ticket = ticket;
         this.change = change;
     }
-
-    // ===================================================================================
-    //                                                                 Constructor Modules
-    //                                                                            ========
-    private Ticket createTicket(int ticketDays, int price) {
-        switch (ticketDays) {
-        case 1:
-            return new OneDayPassport(price);
-        case 2:
-            return new TwoDayPassport(price);
-        default:
-            // 例外を書くときは、この例外を見る人を考える
-            throw new InvalidTicketDaysException("チケットに設定された日数が無効です: " + ticketDays);
-        }
-    }
-    // TODO 長谷川 イメージがつきづらいので、TicketBoothにあったほうが良い。 (2021/05/07)
 
     // ===================================================================================
     //                                                                           Exception

@@ -19,6 +19,7 @@ import org.docksidestage.bizfw.basic.buyticket.Ticket;
 import org.docksidestage.bizfw.basic.buyticket.TicketBooth;
 import org.docksidestage.bizfw.basic.buyticket.TicketBooth.TicketShortMoneyException;
 import org.docksidestage.bizfw.basic.buyticket.TicketBuyResult;
+import org.docksidestage.bizfw.basic.buyticket.TicketType;
 import org.docksidestage.unit.PlainTestCase;
 
 /**
@@ -179,10 +180,20 @@ public class Step05ClassTest extends PlainTestCase {
         TicketBuyResult twoDayPassportResult = booth.buyTwoDayPassport(handedMoney);
         Ticket twoDayPassport = twoDayPassportResult.getTicket();
         String ticketName = twoDayPassport.getName();
-        // TODO 長谷川 下の判定ができるように修正 (2021/05/07)
-        // if(ticket　が twoDayPassportだったら){}
+
         log("ticketName: " + ticketName);
+
+        // 個別に階層化していない場合はenumを用いる。 分岐（特にswitch）を用いるときは注意
+        if (twoDayPassport.getTicketType().equals(TicketType.ONE_DAY)) {
+            log("this ticket is " + TicketType.ONE_DAY.getName());
+        } else if (twoDayPassport.getTicketType().equals(TicketType.TWO_DAY)) {
+            log("this ticket is " + TicketType.TWO_DAY.getName());
+        }
     }
+
+    /*
+     * enum型を使って
+     * */
 
     /**
      * Now you can use only one in spite of two-day passport, so fix Ticket to be able to handle plural days. <br>

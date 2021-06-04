@@ -19,27 +19,35 @@ package org.docksidestage.bizfw.basic.buyticket;
  * @author jflute
  * @author MemCHT
  */
-public class TwoDayPassport extends Ticket {
+public class MultiDayPassport extends Ticket {
 
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
 
-    private String name = "TwoDayPassport";
-    private int days = 2;
+    private int days;
 
     // ===================================================================================
     //                                                                         Constructor
     //                                                                         ===========
-    public TwoDayPassport(int displayPrice) {
-        super(displayPrice);
+
+    /**
+     * 複数日チケットクラスのコンストラクタ
+     * @param ticketType チケットの種類
+     * @param displayPrice 価格
+     * @param name チケット名
+     * @param days 有効日数
+     */
+    public MultiDayPassport(TicketType ticketType, int displayPrice, int days) {
+        super(ticketType, displayPrice);
+        this.days = days;
     }
 
     // ===================================================================================
     //                                                                             In Park
     //                                                                             =======
 
-    // TODO 長谷川 doInParkのオーバーライド考え途中 (2021/05/07)
+    // TODO 長谷川 複数日パスポートでの処理をオーバーライドする (2021/06/04)
     /*@Override
     public void doInPark() {
         if (alreadyIn) {
@@ -51,9 +59,4 @@ public class TwoDayPassport extends Ticket {
     // ===================================================================================
     //                                                                            Accessor
     //                                                                            ========
-
-    @Override
-    public String getName() {
-        return this.name;
-    }
 }

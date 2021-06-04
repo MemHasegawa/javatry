@@ -51,11 +51,12 @@ public class TicketBooth {
      */
     public TicketBuyResult buyOneDayPassport(int handedMoney) {
         // 種別に依存してよいのはこのメソッド。
-        // TODO 長谷川 ここにnew OneDayPassportとかがあるのがベスト。 (2021/05/07)
-        final int ticketDays = 1;
         final int price = ONE_DAY_PRICE;
+        final int ticketDays = 1;
 
-        return doBuyPassport(handedMoney, ticketDays, price);
+        final Ticket ticket = new OneDayPassport(price);
+
+        return doBuyPassport(ticket, handedMoney, ticketDays, price);
     }
 
     /**
@@ -65,11 +66,12 @@ public class TicketBooth {
      */
     public TicketBuyResult buyTwoDayPassport(int handedMoney) {
         // 種別に依存してよいのはこのメソッド。
-        // TODO 長谷川 ここにnew OneDayPassportとかがあるのがベスト。 (2021/05/07)
-        final int ticketDays = 2;
         final int price = TWO_DAY_PRICE;
+        final int ticketDays = 2;
 
-        return doBuyPassport(handedMoney, ticketDays, price);
+        final Ticket ticket = new MultiDayPassport(TicketType.TWO_DAY, price, ticketDays);
+
+        return doBuyPassport(ticket, handedMoney, ticketDays, price);
     }
 
     /**
@@ -79,16 +81,15 @@ public class TicketBooth {
      * @param price 料金
      * @return お釣り
      */
-    private TicketBuyResult doBuyPassport(int handedMoney, int ticketDays, int price) {
+    private TicketBuyResult doBuyPassport(Ticket ticket, int handedMoney, int ticketDays, int price) {
         checkSoldOut(); // 売り切れチェック
         checkShortMoney(handedMoney, price); // お金不足チェック
         reduceQuantity(ticketDays); // チケット数を減らす
         increaseSalesProceeds(ticketDays, price); // 売り上げを増やす
 
-        /*Ticket ticket = new Ticket(price);*/ // チケットを生成
         int change = calcChange(handedMoney, price); // お釣りを計算
 
-        return new TicketBuyResult(/*ticket, */ticketDays, change, price); // チケットの購入結果インスタンスを返す
+        return new TicketBuyResult(ticket, change); // チケットの購入結果インスタンスを返す
     }
 
     // -------------------- buy ticket modules --------------------

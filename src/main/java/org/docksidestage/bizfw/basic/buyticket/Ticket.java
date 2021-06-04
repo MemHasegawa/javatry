@@ -26,11 +26,13 @@ public abstract class Ticket {
     //                                                                           =========
     private final int displayPrice;
     protected boolean alreadyIn;
+    protected TicketType ticketType;
 
     // ===================================================================================
     //                                                                         Constructor
     //                                                                         ===========
-    public Ticket(int displayPrice) {
+    public Ticket(TicketType ticketType, int displayPrice) {
+        this.ticketType = ticketType;
         this.displayPrice = displayPrice;
     }
 
@@ -44,7 +46,6 @@ public abstract class Ticket {
         }
         alreadyIn = true;
     }
-    // TODO 長谷川 TwoDayPassport考えるときに修正が必要 (2021/05/07)
 
     // ===================================================================================
     //                                                                            Accessor
@@ -57,5 +58,11 @@ public abstract class Ticket {
         return alreadyIn;
     }
 
-    public abstract String getName();
+    public TicketType getTicketType() {
+        return ticketType;
+    }
+
+    public String getName() {
+        return ticketType.getName();
+    };
 }

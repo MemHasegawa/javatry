@@ -25,14 +25,11 @@ public class OneDayPassport extends Ticket {
     //                                                                           Attribute
     //                                                                           =========
 
-    private String name = "OneDayPassport";
-    private int days = 1;
-
     // ===================================================================================
     //                                                                         Constructor
     //                                                                         ===========
     public OneDayPassport(int displayPrice) {
-        super(displayPrice);
+        super(TicketType.ONE_DAY, displayPrice);
     }
 
     // ===================================================================================
@@ -43,8 +40,4 @@ public class OneDayPassport extends Ticket {
     //                                                                            Accessor
     //                                                                            ========
 
-    @Override
-    public String getName() {
-        return this.name;
-    }
 }
