@@ -34,9 +34,9 @@ public class MultiDayPassport extends Ticket {
     /**
      * 複数日チケットクラスのコンストラクタ
      * @param ticketType チケットの種類
-     * @param displayPrice 価格
+     * @param displayPrice チケットの値段
      * @param name チケット名
-     * @param days 有効日数
+     * @param days チケットの有効日数
      */
     public MultiDayPassport(TicketType ticketType, int displayPrice, int days) {
         super(ticketType, displayPrice);

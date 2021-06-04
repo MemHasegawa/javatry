@@ -47,7 +47,7 @@ public class TicketBooth {
     /**
      * OneDayPassportを買う
      * @param handedMoney 受け取ったお金
-     * @return OneDayPassportチケット購入結果
+     * @return OneDayPassport チケット購入結果
      */
     public TicketBuyResult buyOneDayPassport(int handedMoney) {
         // 種別に依存してよいのはこのメソッド。
@@ -62,7 +62,7 @@ public class TicketBooth {
     /**
      * TwoDayPassportを買う
      * @param handedMoney 受け取ったお金
-     * @return TwoDayPassportチケット購入結果
+     * @return MultiDayPassport チケット購入結果
      */
     public TicketBuyResult buyTwoDayPassport(int handedMoney) {
         // 種別に依存してよいのはこのメソッド。

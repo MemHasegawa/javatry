@@ -31,6 +31,11 @@ public abstract class Ticket {
     // ===================================================================================
     //                                                                         Constructor
     //                                                                         ===========
+    /**
+     * 抽象チケットクラスのコンストラクタ
+     * @param ticketType チケットの種類
+     * @param displayPrice チケットの値段
+     */
     public Ticket(TicketType ticketType, int displayPrice) {
         this.ticketType = ticketType;
         this.displayPrice = displayPrice;
