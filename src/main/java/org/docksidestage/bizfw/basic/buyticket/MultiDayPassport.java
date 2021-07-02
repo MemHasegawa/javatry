@@ -25,8 +25,6 @@ public class MultiDayPassport extends Ticket {
     //                                                                           Attribute
     //                                                                           =========
 
-    private int days;
-
     // ===================================================================================
     //                                                                         Constructor
     //                                                                         ===========
@@ -38,23 +36,15 @@ public class MultiDayPassport extends Ticket {
      * @param name チケット名
      * @param days チケットの有効日数
      */
-    public MultiDayPassport(TicketType ticketType, int displayPrice, int days) {
-        super(ticketType, displayPrice);
-        this.days = days;
+    public MultiDayPassport(TicketType ticketType) {
+        super(ticketType);
     }
 
     // ===================================================================================
     //                                                                             In Park
     //                                                                             =======
 
-    // TODO 長谷川 複数日パスポートでの処理をオーバーライドする (2021/06/04)
-    /*@Override
-    public void doInPark() {
-        if (alreadyIn) {
-            throw new IllegalStateException("Already in park by this ticket: displayedPrice=" + displayPrice);
-        }
-        alreadyIn = true;
-    }*/
+    // done? TODO 長谷川 複数日パスポートでの処理をオーバーライドする (2021/06/04)
 
     // ===================================================================================
     //                                                                            Accessor

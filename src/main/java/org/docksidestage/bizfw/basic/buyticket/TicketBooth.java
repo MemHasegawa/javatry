@@ -25,8 +25,6 @@ public class TicketBooth {
     //                                                                          Definition
     //                                                                          ==========
     private static final int MAX_QUANTITY = 10;
-    private static final int ONE_DAY_PRICE = 7400; // when 2019/06/15
-    private static final int TWO_DAY_PRICE = 13200;
 
     // ===================================================================================
     //                                                                           Attribute
@@ -51,12 +49,13 @@ public class TicketBooth {
      */
     public TicketBuyResult buyOneDayPassport(int handedMoney) {
         // 種別に依存してよいのはこのメソッド。
-        final int price = ONE_DAY_PRICE;
-        final int ticketDays = 1;
+        // done TODO 長谷川 enumをもっと最適化できる (2021/07/02)
+        final TicketType ticketType = TicketType.ONE_DAY;
+        final int ticketDays = ticketType.getDays();
 
-        final Ticket ticket = new OneDayPassport(price);
+        final Ticket ticket = new OneDayPassport();
 
-        return doBuyPassport(ticket, handedMoney, ticketDays, price);
+        return doBuyPassport(ticket, handedMoney, ticketDays);
     }
 
     /**
@@ -66,26 +65,44 @@ public class TicketBooth {
      */
     public TicketBuyResult buyTwoDayPassport(int handedMoney) {
         // 種別に依存してよいのはこのメソッド。
-        final int price = TWO_DAY_PRICE;
-        final int ticketDays = 2;
+        // done TODO 長谷川 enumをもっと最適化できる (2021/07/02)
+        final TicketType ticketType = TicketType.TWO_DAY;
+        final int ticketDays = ticketType.getDays();
 
-        final Ticket ticket = new MultiDayPassport(TicketType.TWO_DAY, price, ticketDays);
+        final MultiDayPassport ticket = new MultiDayPassport(ticketType);
 
-        return doBuyPassport(ticket, handedMoney, ticketDays, price);
+        return doBuyPassport(ticket, handedMoney, ticketDays);
+    }
+
+    /**
+     * TwoDayPassportを買う
+     * @param handedMoney 受け取ったお金
+     * @return MultiDayPassport チケット購入結果
+     */
+    public TicketBuyResult buyFourDayPassport(int handedMoney) {
+        // 種別に依存してよいのはこのメソッド。
+        // done TODO 長谷川 enumをもっと最適化できる (2021/07/02)
+        final TicketType ticketType = TicketType.FOUR_DAY;
+        final int ticketDays = ticketType.getDays();
+
+        final MultiDayPassport ticket = new MultiDayPassport(ticketType);
+
+        return doBuyPassport(ticket, handedMoney, ticketDays);
     }
 
     /**
      * Passportを買う
      * @param handedMoney 受け取ったお金
-     * @param ticketDays チケットの日数
-     * @param price 料金
+     * @param quantity チケットの消費枚数
      * @return お釣り
      */
-    private TicketBuyResult doBuyPassport(Ticket ticket, int handedMoney, int ticketDays, int price) {
+    private TicketBuyResult doBuyPassport(Ticket ticket, int handedMoney, int quantity) {
+        final int price = ticket.getDisplayPrice();
+
         checkSoldOut(); // 売り切れチェック
         checkShortMoney(handedMoney, price); // お金不足チェック
-        reduceQuantity(ticketDays); // チケット数を減らす
-        increaseSalesProceeds(ticketDays, price); // 売り上げを増やす
+        reduceQuantity(quantity); // チケット数を減らす
+        increaseSalesProceeds(quantity, price); // 売り上げを増やす
 
         int change = calcChange(handedMoney, price); // お釣りを計算
 

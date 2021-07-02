@@ -126,7 +126,7 @@ public class Step05ClassTest extends PlainTestCase {
      * Recycle duplicate logics between one-day and two-day by e.g. private method in class. (And confirm result of both before and after) <br>
      * (OneDayとTwoDayで冗長なロジックがあったら、クラス内のprivateメソッドなどで再利用しましょう (修正前と修正後の実行結果を確認))
      */
-    // TODO 長谷川_2021年2月5日_考え中
+    // done TODO 長谷川_2021年2月5日_考え中
     public void test_class_letsFix_refactor_recycle() {
         TicketBooth booth = new TicketBooth();
         booth.buyOneDayPassport(10000);
@@ -140,7 +140,7 @@ public class Step05ClassTest extends PlainTestCase {
      * Now you cannot get ticket if you buy one-day passport, so return Ticket class and do in-park. <br>
      * (OneDayPassportを買ってもチケットをもらえませんでした。戻り値でTicketクラスを戻すようにしてインしましょう)
      */
-    // TODO 長谷川_2021年3月5日_考え中_
+    // done TODO 長谷川_2021年3月5日_考え中_
     // 要件に一貫性があれば、どのように実装しても良い。
     public void test_class_moreFix_return_ticket() {
         // uncomment out after modifying the method
@@ -197,6 +197,17 @@ public class Step05ClassTest extends PlainTestCase {
      */
     public void test_class_moreFix_usePluralDays() {
         // your confirmation code here
+        TicketBooth booth = new TicketBooth();
+        int handedMoney = 20000;
+        TicketBuyResult twoDayPassportResult = booth.buyTwoDayPassport(handedMoney);
+        Ticket twoDayPassport = twoDayPassportResult.getTicket();
+
+        log(twoDayPassport.getValidDays() + " days left"); // 2 days
+        twoDayPassport.doInPark();
+        log(twoDayPassport.getValidDays() + " days left"); // 1 days
+        twoDayPassport.doInPark();
+        log(twoDayPassport.getValidDays() + " days left"); // 0 days
+        twoDayPassport.doInPark(); // throw error
     }
 
     // ===================================================================================
@@ -208,6 +219,17 @@ public class Step05ClassTest extends PlainTestCase {
      */
     public void test_class_moreFix_wonder_four() {
         // your confirmation code here
+        TicketBooth booth = new TicketBooth();
+        int handedMoney = 20000;
+        TicketBuyResult twoDayPassportResult = booth.buyTwoDayPassport(handedMoney);
+        Ticket twoDayPassport = twoDayPassportResult.getTicket();
+
+        for (int i = twoDayPassport.getValidDays(); i > 0; i--) {
+            log(twoDayPassport.getValidDays() + " days left"); // 4~1 days
+            twoDayPassport.doInPark();
+        }
+        log(twoDayPassport.getValidDays() + " days left"); // 0 days
+        twoDayPassport.doInPark(); // throw error
     }
 
     /**
@@ -216,6 +238,7 @@ public class Step05ClassTest extends PlainTestCase {
      */
     public void test_class_moreFix_wonder_night() {
         // your confirmation code here
+        // TODO 長谷川 TicketTypeで日数も定義できそう？ (2021/07/02)
     }
 
     /**

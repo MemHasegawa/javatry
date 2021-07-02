@@ -24,9 +24,9 @@ public abstract class Ticket {
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    private final int displayPrice;
     protected boolean alreadyIn;
     protected TicketType ticketType;
+    protected int days;
 
     // ===================================================================================
     //                                                                         Constructor
@@ -36,9 +36,9 @@ public abstract class Ticket {
      * @param ticketType チケットの種類
      * @param displayPrice チケットの値段
      */
-    public Ticket(TicketType ticketType, int displayPrice) {
+    public Ticket(TicketType ticketType) {
         this.ticketType = ticketType;
-        this.displayPrice = displayPrice;
+        this.days = ticketType.getDays();
     }
 
     // ===================================================================================
@@ -46,17 +46,21 @@ public abstract class Ticket {
     //                                                                             =======
     // 
     public void doInPark() {
-        if (alreadyIn) {
-            throw new IllegalStateException("Already in park by this ticket: displayedPrice=" + displayPrice);
+        if (days <= 0) {
+            throw new IllegalStateException("Ticket is expired: validDays = " + this.days);
         }
-        alreadyIn = true;
+        days--; // 1日消費
     }
 
     // ===================================================================================
     //                                                                            Accessor
     //                                                                            ========
     public int getDisplayPrice() {
-        return displayPrice;
+        return ticketType.getPrice();
+    }
+
+    public int getValidDays() {
+        return this.days;
     }
 
     public boolean isAlreadyIn() {

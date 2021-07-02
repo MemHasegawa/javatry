@@ -20,16 +20,29 @@ package org.docksidestage.bizfw.basic.buyticket;
  * @author MemCHT
  */
 public enum TicketType {
-    ONE_DAY("OneDayPassport"), TWO_DAY("TwoDayPassport"), FOUR_DAY("FourDayPassport"), NIGHT_ONLY("NightOnlyPassport");
+    // インスタンス生成している感じ。
+    ONE_DAY("OneDayPassport", 7400, 1), TWO_DAY("TwoDayPassport", 13200, 2), FOUR_DAY("FourDayPassport", 0,
+            4), NIGHT_ONLY("NightOnlyPassport", 0, 1);
 
-    private String name;
+    private final String label;
+    private final int price;
+    private final int days;
 
-    private TicketType(String name) {
-
-        this.name = name;
+    private TicketType(String label, int price, int days) {
+        this.label = label;
+        this.price = price;
+        this.days = days;
     }
 
     public String getName() {
-        return this.name;
+        return this.label;
+    }
+
+    public int getPrice() {
+        return this.price;
+    }
+
+    public int getDays() {
+        return this.days;
     }
 }

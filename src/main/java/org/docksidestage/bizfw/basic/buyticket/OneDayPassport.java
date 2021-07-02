@@ -28,8 +28,8 @@ public class OneDayPassport extends Ticket {
     // ===================================================================================
     //                                                                         Constructor
     //                                                                         ===========
-    public OneDayPassport(int displayPrice) {
-        super(TicketType.ONE_DAY, displayPrice);
+    public OneDayPassport() {
+        super(TicketType.ONE_DAY);
     }
 
     // ===================================================================================
