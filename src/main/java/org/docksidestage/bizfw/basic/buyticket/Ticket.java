@@ -24,9 +24,8 @@ public abstract class Ticket {
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    protected boolean alreadyIn;
     protected TicketType ticketType;
-    protected int days;
+    protected int validDays;
 
     // ===================================================================================
     //                                                                         Constructor
@@ -34,11 +33,10 @@ public abstract class Ticket {
     /**
      * 抽象チケットクラスのコンストラクタ
      * @param ticketType チケットの種類
-     * @param displayPrice チケットの値段
      */
     public Ticket(TicketType ticketType) {
         this.ticketType = ticketType;
-        this.days = ticketType.getDays();
+        this.validDays = ticketType.getDays();
     }
 
     // ===================================================================================
@@ -46,10 +44,10 @@ public abstract class Ticket {
     //                                                                             =======
     // 
     public void doInPark() {
-        if (days <= 0) {
-            throw new IllegalStateException("Ticket is expired: validDays = " + this.days);
+        if (validDays <= 0) {
+            throw new IllegalStateException("Ticket is expired: validDays = " + this.validDays);
         }
-        days--; // 1日消費
+        validDays--; // 1日消費
     }
 
     // ===================================================================================
@@ -60,11 +58,7 @@ public abstract class Ticket {
     }
 
     public int getValidDays() {
-        return this.days;
-    }
-
-    public boolean isAlreadyIn() {
-        return alreadyIn;
+        return this.validDays;
     }
 
     public TicketType getTicketType() {
@@ -72,6 +66,6 @@ public abstract class Ticket {
     }
 
     public String getName() {
-        return ticketType.getName();
+        return ticketType.getLabel();
     };
 }

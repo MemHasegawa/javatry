@@ -126,7 +126,7 @@ public class Step05ClassTest extends PlainTestCase {
      * Recycle duplicate logics between one-day and two-day by e.g. private method in class. (And confirm result of both before and after) <br>
      * (OneDayとTwoDayで冗長なロジックがあったら、クラス内のprivateメソッドなどで再利用しましょう (修正前と修正後の実行結果を確認))
      */
-    // done TODO 長谷川_2021年2月5日_考え中
+    // done 長谷川_2021年2月5日_考え中
     public void test_class_letsFix_refactor_recycle() {
         TicketBooth booth = new TicketBooth();
         booth.buyOneDayPassport(10000);
@@ -172,7 +172,7 @@ public class Step05ClassTest extends PlainTestCase {
      * Now you cannot judge ticket type "one-day or two-day?", so add method to judge it. <br>
      * (チケットをもらってもOneDayなのかTwoDayなのか判定できません。判定できるメソッドを追加しましょう)
      */
-    // TODO 長谷川_2021年4月2日_複数のTicketをどう管理するか考え中。
+    // done 長谷川_2021年4月2日_複数のTicketをどう管理するか考え中。
     public void test_class_moreFix_ticketType() {
         // your confirmation code here
         TicketBooth booth = new TicketBooth();
@@ -185,9 +185,9 @@ public class Step05ClassTest extends PlainTestCase {
 
         // 個別に階層化していない場合はenumを用いる。 分岐（特にswitch）を用いるときは注意
         if (twoDayPassport.getTicketType().equals(TicketType.ONE_DAY)) {
-            log("this ticket is " + TicketType.ONE_DAY.getName());
+            log("this ticket is " + TicketType.ONE_DAY.getLabel());
         } else if (twoDayPassport.getTicketType().equals(TicketType.TWO_DAY)) {
-            log("this ticket is " + TicketType.TWO_DAY.getName());
+            log("this ticket is " + TicketType.TWO_DAY.getLabel());
         }
     }
 
@@ -221,24 +221,24 @@ public class Step05ClassTest extends PlainTestCase {
         // your confirmation code here
         TicketBooth booth = new TicketBooth();
         int handedMoney = 20000;
-        TicketBuyResult twoDayPassportResult = booth.buyTwoDayPassport(handedMoney);
-        Ticket twoDayPassport = twoDayPassportResult.getTicket();
+        TicketBuyResult fourDayPassportResult = booth.buyFourDayPassport(handedMoney);
+        Ticket fourDayPassport = fourDayPassportResult.getTicket();
 
-        for (int i = twoDayPassport.getValidDays(); i > 0; i--) {
-            log(twoDayPassport.getValidDays() + " days left"); // 4~1 days
-            twoDayPassport.doInPark();
+        for (int i = fourDayPassport.getValidDays(); i > 0; i--) {
+            log(fourDayPassport.getValidDays() + " days left"); // 4~1 days
+            fourDayPassport.doInPark();
         }
-        log(twoDayPassport.getValidDays() + " days left"); // 0 days
-        twoDayPassport.doInPark(); // throw error
+        log(fourDayPassport.getValidDays() + " days left"); // 0 days
+        fourDayPassport.doInPark(); // throw error
     }
 
     /**
-     * Fix it to be able to buy night-only two-day passport (price is 7400). <br>
-     * (NightOnlyTwoDayPassport (金額は7400) のチケットも買えるようにしましょう)
+     * Fix it to be able to buy night-only two-day passport (price is 7400), which can be used at only night. <br>
+     * (NightOnlyTwoDayPassport (金額は7400) のチケットも買えるようにしましょう。夜しか使えないようにしましょう。)
      */
     public void test_class_moreFix_wonder_night() {
         // your confirmation code here
-        // TODO 長谷川 TicketTypeで日数も定義できそう？ (2021/07/02)
+
     }
 
     /**

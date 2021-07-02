@@ -49,7 +49,7 @@ public class TicketBooth {
      */
     public TicketBuyResult buyOneDayPassport(int handedMoney) {
         // 種別に依存してよいのはこのメソッド。
-        // done TODO 長谷川 enumをもっと最適化できる (2021/07/02)
+        // done 長谷川 enumをもっと最適化できる (2021/07/02)
         final TicketType ticketType = TicketType.ONE_DAY;
         final int ticketDays = ticketType.getDays();
 
@@ -65,7 +65,7 @@ public class TicketBooth {
      */
     public TicketBuyResult buyTwoDayPassport(int handedMoney) {
         // 種別に依存してよいのはこのメソッド。
-        // done TODO 長谷川 enumをもっと最適化できる (2021/07/02)
+        // done 長谷川 enumをもっと最適化できる (2021/07/02)
         final TicketType ticketType = TicketType.TWO_DAY;
         final int ticketDays = ticketType.getDays();
 
@@ -81,7 +81,7 @@ public class TicketBooth {
      */
     public TicketBuyResult buyFourDayPassport(int handedMoney) {
         // 種別に依存してよいのはこのメソッド。
-        // done TODO 長谷川 enumをもっと最適化できる (2021/07/02)
+        // done 長谷川 enumをもっと最適化できる (2021/07/02)
         final TicketType ticketType = TicketType.FOUR_DAY;
         final int ticketDays = ticketType.getDays();
 

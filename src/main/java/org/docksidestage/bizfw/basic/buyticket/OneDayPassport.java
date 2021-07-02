@@ -21,6 +21,8 @@ package org.docksidestage.bizfw.basic.buyticket;
  */
 public class OneDayPassport extends Ticket {
 
+    //#thinking 長谷川 後で使うかもしれないので残す。 (2021/07/02)
+
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========

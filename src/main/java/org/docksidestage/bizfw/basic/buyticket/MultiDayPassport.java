@@ -21,6 +21,8 @@ package org.docksidestage.bizfw.basic.buyticket;
  */
 public class MultiDayPassport extends Ticket {
 
+    // #thinking 長谷川 後で使うかもしれないので残す。 (2021/07/02)
+
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
@@ -32,9 +34,6 @@ public class MultiDayPassport extends Ticket {
     /**
      * 複数日チケットクラスのコンストラクタ
      * @param ticketType チケットの種類
-     * @param displayPrice チケットの値段
-     * @param name チケット名
-     * @param days チケットの有効日数
      */
     public MultiDayPassport(TicketType ticketType) {
         super(ticketType);
