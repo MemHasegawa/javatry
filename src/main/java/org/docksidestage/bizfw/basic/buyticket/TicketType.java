@@ -25,6 +25,7 @@ public enum TicketType {
     private String name;
 
     private TicketType(String name) {
+
         this.name = name;
     }
 
